@@ -1,19 +1,19 @@
 const Ad = require('../models/Ad');
 const User = require('../models/User');
-const Mail = require('../services/Mail');
-
+const Queue = require('../services/Queue');
+const PurchaseMail = require('../jobs/purchaseMail');
 class PurchaseController {
   async store(req, res) {
     const {ad, content} = req.body;
     const purchaseAd = await Ad.findById(ad).populate('author');
-    const user = await User.findById(req.UserId);
+    const user = await User.findById(req.userId);
 
-    await Mail.sendMail({
-      from: '"Davi Ribeiro" <luminuszz43@gmail.com>',
-      to: purchaseAd.author.email,
-      subject: `Solcitação de compra : ${purchaseAd.title}`,
-      html: '<p>TESTE</p>',
-    });
+    Queue.create(PurchaseMail.key, {
+      ad: purchaseAd,
+      user,
+      content,
+    }).save();
+
     return res.status(200).json({teste: 'Sucesso'});
   }
 } module.exports = new PurchaseController();
