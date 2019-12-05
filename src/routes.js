@@ -3,10 +3,11 @@ const express = require('express');
 // eslint-disable-next-line new-cap
 const routes = express.Router();
 
-const UserController = require('./app/controllers/UserController');
-const SessionController = require('./app/controllers/SessionController');
 
 const authMiddleware = require('./app/middlewares/auth');
+
+// Automatizando importação de controllers com "require-dir"
+const controllers = require('./app/controllers/index');
 
 // Middlewares Routes
 routes.get('/teste', authMiddleware, (req, res) =>
@@ -14,7 +15,7 @@ routes.get('/teste', authMiddleware, (req, res) =>
 );
 
 // Controllers Routes
-routes.post('/users', UserController.store);
-routes.post('/session', SessionController.store);
+routes.post('/users', controllers.UserController.store);
+routes.post('/session', controllers.SessionController.store);
 
 module.exports = routes;
