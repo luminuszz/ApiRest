@@ -11,6 +11,10 @@ const Ad = new mongoose.Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
 
   author: {
     type: mongoose.Schema.Types.ObjectId,

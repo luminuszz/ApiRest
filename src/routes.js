@@ -9,13 +9,20 @@ const authMiddleware = require('./app/middlewares/auth');
 // Automatizando importação de controllers com "require-dir"
 const controllers = require('./app/controllers/index');
 
-// Middlewares Routes
-routes.get('/teste', authMiddleware, (req, res) =>
-  res.json({ok: true}),
-);
-
 // Controllers Routes
 routes.post('/users', controllers.UserController.store);
 routes.post('/session', controllers.SessionController.store);
+
+// Middlewares Routes
+routes.use(authMiddleware);
+
+/**
+ * Ads
+ */
+routes.get('/ads', controllers.AdController.index);
+routes.get('/ads/:id', controllers.AdController.show);
+routes.post('/ads', controllers.AdController.store);
+routes.put('/ads/:id', controllers.AdController.uptade);
+routes.delete('/ads/:id', controllers.AdController.destroy);
 
 module.exports = routes;
