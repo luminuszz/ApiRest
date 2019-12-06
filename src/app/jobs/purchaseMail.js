@@ -1,13 +1,12 @@
 const Mail = require('../services/Mail');
 
-
 class PurchaseMail {
   get key() {
     return 'PurchaseMail';
   }
 
   async handle(job, done) {
-    const {ad, user, content} = job.data;
+    const {user, content} = job.data;
     await Mail.sendMail({
       from: '"Davi Ribeiro" <luminuszz43@gmail.com>',
       to: purchaseAd.author.email,
@@ -32,8 +31,7 @@ class PurchaseMail {
       </body>
 
     </html>
-    `
-      ,
+    `,
     });
     return done();
   }
