@@ -1,9 +1,13 @@
+require('dotenv').config();
+
 const express = require('express');
 const Sentry = require('@sentry/node');
 const sentryConfig = require('./config/sentry');
 const mongoose = require('mongoose');
+const dbConfig = require('./config/database');
 const validate = require('express-validation');
 const Youch = require('youch');
+
 
 class App {
   constructor() {
@@ -21,7 +25,7 @@ class App {
 
 
   database() {
-    mongoose.connect('mongodb://localhost:27017/bankapi', {
+    mongoose.connect(dbConfig.db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
