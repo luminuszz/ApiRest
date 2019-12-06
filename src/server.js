@@ -37,11 +37,11 @@ class App {
   }
 
   exceptions() {
-    /**
-    *  if (process.env.Node_ENV === 'production') {
-    * }
-    */
-    this.express.use(Sentry.Handlers.errorHandler());
+    if (process.env.Node_ENV === 'production') {
+      this.express.use(Sentry.Handlers.errorHandler());
+    }
+
+
     this.express.use(async (err, req, res, next) => {
       if (err instanceof validate.ValidationError) {
         return res.status(err.status).json(err);
