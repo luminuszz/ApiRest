@@ -1,4 +1,6 @@
 const server = require('./server');
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 
-server.listen(3000 || process.env.PORT);
+server.listen(PORT, HOST || process.env.PORT);

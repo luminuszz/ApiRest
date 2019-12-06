@@ -1,6 +1,5 @@
 const kue = require('kue');
 const redisConfig = require('../../config/redis');
-const jobs = require('../jobs');
 const PurchaseMail = require('../jobs/purchaseMail');
 const Queue = kue.createQueue({redis: redisConfig});
 

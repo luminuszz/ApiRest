@@ -1,17 +1,25 @@
 const express = require('express');
+const validate = require('express-validation');
 
-// eslint-disable-next-line new-cap
 const routes = express.Router();
-
 
 const authMiddleware = require('./app/middlewares/auth');
 
-// Automatizando importação de controllers com "require-dir"
+// Automatizando importação  com "require-dir"
 const controllers = require('./app/controllers/index');
+const validators = require('./app/validators/index');
 
 // Controllers Routes
-routes.post('/users', controllers.UserController.store);
-routes.post('/session', controllers.SessionController.store);
+routes.post(
+    '/users',
+    validate(validators.User),
+    controllers.UserController.store,
+);
+routes.post(
+    '/session',
+    validate(validators.Session),
+    controllers.SessionController.store,
+);
 
 // Middlewares Routes
 routes.use(authMiddleware);
@@ -21,13 +29,21 @@ routes.use(authMiddleware);
  */
 routes.get('/ads', controllers.AdController.index);
 routes.get('/ads/:id', controllers.AdController.show);
-routes.post('/ads', controllers.AdController.store);
-routes.put('/ads/:id', controllers.AdController.uptade);
+routes.post('/ads', validate(validators.Ad), controllers.AdController.store);
+routes.put(
+    '/ads/:id',
+    validate(validators.Ad),
+    controllers.AdController.uptade,
+);
 routes.delete('/ads/:id', controllers.AdController.destroy);
 
 /**
  * Purchases
  */
-routes.post('/purchase', controllers.PurchaseController.store);
+routes.post(
+    '/purchase',
+    validate(validators.Purchase),
+    controllers.PurchaseController.store,
+);
 
 module.exports = routes;
