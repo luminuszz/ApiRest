@@ -11,7 +11,7 @@ class PurchaseController {
     console.log(purchaseAd.author);
 
 
-    const purchaseLog = await Purchase.create({
+    Purchase.create({
       purchaseState: false,
       idUser: user._id,
       idAd: ad,

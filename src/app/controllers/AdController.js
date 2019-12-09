@@ -11,7 +11,9 @@ class AdController {
     /**
      * Filters
      */
-    const filters ={};
+    const filters ={
+      purchasedBy: null,
+    };
 
     if (req.query.price_min ||req.query.price_max ) {
       filters.price = {};
