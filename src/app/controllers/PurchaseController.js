@@ -1,5 +1,6 @@
 const Ad = require('../models/Ad');
 const User = require('../models/User');
+const Purchase = require('../models/Purchase');
 const Queue = require('../services/Queue');
 const PurchaseMail = require('../jobs/purchaseMail');
 class PurchaseController {
@@ -13,6 +14,8 @@ class PurchaseController {
       user,
       content,
     }).save();
+    // Criando purchase
+    // const purchaseSave = await Purchase.create({});
 
     return res.status(200).json({teste: 'Sucesso'});
   }
