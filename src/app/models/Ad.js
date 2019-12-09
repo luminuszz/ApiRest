@@ -22,6 +22,11 @@ const Ad = new mongoose.Schema({
     required: true,
   },
 
+  purchasedBy: {
+    type: String,
+
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

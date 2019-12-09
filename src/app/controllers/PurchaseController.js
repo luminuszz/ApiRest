@@ -34,6 +34,12 @@ class PurchaseController {
           new: true,
         },
     );
+    await Ad.findByIdAndUpdate(
+        purchaseUptade.idAd,
+        {purchasedBy: purchaseUptade._id},
+        {new: true},
+    );
+
     res.status(200).json(purchaseUptade);
   }
 }
