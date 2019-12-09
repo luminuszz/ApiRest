@@ -6,7 +6,7 @@ class PurchaseMail {
   }
 
   async handle(job, done) {
-    const {user, content, purchaseAd} = job.data;
+    const {user, content, purchaseAd, purchaseLogId} = job.data;
     await Mail.sendMail({
       from: '"Davi Ribeiro" <luminuszz43@gmail.com>',
       to: purchaseAd.author.email,
@@ -27,7 +27,9 @@ class PurchaseMail {
               <br>
 
           <strong>Nome do usuário ${user.name} ({{ user.email }})</strong>
-          <p> ${content}</p>
+          <p> ${content}, ${purchaseLogId}</p>
+
+          <a><button>Comprar</button></a>
       </body>
 
     </html>

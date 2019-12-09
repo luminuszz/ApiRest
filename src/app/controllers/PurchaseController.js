@@ -1,5 +1,6 @@
 const Ad = require('../models/Ad');
 const User = require('../models/User');
+const Purchase = require('../models/Purchase');
 const Queue = require('../services/Queue');
 const PurchaseMail = require('../jobs/purchaseMail');
 class PurchaseController {
@@ -8,15 +9,21 @@ class PurchaseController {
     const purchaseAd = await Ad.findById(ad).populate('author');
     const user = await User.findById(req.userId);
 
+    const purchaseLog = await Purchase.create({
+      purchaseState: false,
+      idUser: user._id,
+      idAd: ad,
+    });
+
     Queue.create(PurchaseMail.key, {
       purchaseAd,
+      purchaseLogId: purchaseLog._id,
       user,
       content,
     }).save();
     // Salvando purchase no banco
 
-
-    return res.status(200).json({teste: 'ok'});
+    return res.status(200).json({teste: 'ok', purchaseLog});
   }
 }
 module.exports = new PurchaseController();
