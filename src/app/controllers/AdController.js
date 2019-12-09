@@ -4,12 +4,18 @@ const Ad = require('../models/Ad');
 class AdController {
   async index(req, res) {
     /**
+     * Conditions
+     */
+
+
+    /**
      * Filters
      */
     const filters ={};
 
     if (req.query.price_min ||req.query.price_max ) {
       filters.price = {};
+
       if (req.query.price_min) {
         filters.price.$gte = req.query.price_min;
       }

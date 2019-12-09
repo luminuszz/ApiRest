@@ -15,6 +15,10 @@ const Ad = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  purchasedBy: {
+    type: String,
+
+  },
 
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -22,10 +26,6 @@ const Ad = new mongoose.Schema({
     required: true,
   },
 
-  purchasedBy: {
-    type: String,
-
-  },
 
   createdAt: {
     type: Date,

@@ -8,6 +8,8 @@ class PurchaseController {
     const {ad, content} = req.body;
     const purchaseAd = await Ad.findById(ad).populate('author');
     const user = await User.findById(req.userId);
+    console.log(purchaseAd.author);
+
 
     const purchaseLog = await Purchase.create({
       purchaseState: false,
@@ -17,14 +19,17 @@ class PurchaseController {
 
     Queue.create(PurchaseMail.key, {
       purchaseAd,
-      purchaseLogId: purchaseLog._id,
+      purchaseLog,
       user,
       content,
     }).save();
+
+
     // Salvando purchase no banco
 
-    return res.status(200).json({teste: 'ok', purchaseLog});
+    return res.status(200).json({teste: 'ok'});
   }
+
 
   async purchaseSell(req, res) {
     const purchaseUptade = await Purchase.findByIdAndUpdate(
