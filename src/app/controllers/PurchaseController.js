@@ -1,6 +1,5 @@
 const Ad = require('../models/Ad');
 const User = require('../models/User');
-const Purchase = require('../models/Purchase');
 const Queue = require('../services/Queue');
 const PurchaseMail = require('../jobs/purchaseMail');
 class PurchaseController {
@@ -10,13 +9,14 @@ class PurchaseController {
     const user = await User.findById(req.userId);
 
     Queue.create(PurchaseMail.key, {
-      ad: purchaseAd,
+      purchaseAd,
       user,
       content,
     }).save();
-    // Criando purchase
-    // const purchaseSave = await Purchase.create({});
+    // Salvando purchase no banco
 
-    return res.status(200).json({teste: 'Sucesso'});
+
+    return res.status(200).json({teste: 'ok'});
   }
-} module.exports = new PurchaseController();
+}
+module.exports = new PurchaseController();
