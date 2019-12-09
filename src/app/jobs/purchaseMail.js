@@ -29,7 +29,7 @@ class PurchaseMail {
           <strong>Nome do usuário ${user.name} ({{ user.email }})</strong>
           <p> ${content}, ${purchaseLogId}</p>
 
-          <a><button>Comprar</button></a>
+          <a hre='http://localhost/'><button>Comprar</button></a>
       </body>
 
     </html>
