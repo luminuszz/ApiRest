@@ -1,7 +1,8 @@
 # Let'Purchase
-> Let'Purchase It's a basic e-commerce, made using nodejs, mongodb and redis
+> Let's Purchase It's a base back-end api for  e-commerce  , made using nodejs, mongodb and redis,
 
 [![NPM Version][npm-image]][npm-url]
+[![YARN Version][yarn-image]][yarn-url]
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 
