@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build":"node src/index.js"
   },
   "name": "Api_REST",
   "version": "1.0.0",
